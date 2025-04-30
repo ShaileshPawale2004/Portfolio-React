@@ -131,7 +131,11 @@ function App() {
                   <h3 className="hello">Hello, my name is <span className="name">Shailesh Pawale</span></h3>
                   <h3 className="my-profession">I'm a <span className="typing">Web Designer</span></h3>
                   <p>I'm a Web Designer with extensive experience for over xyz years. My expertise is to create website design, graphic design and many more...</p>
-                  <a className="btn hire-me" href="#contact">Hire Me</a>
+                  <a href="#contact">
+                  <button className="hire-me-btn">Hire Me</button>
+                  </a>
+
+
                 </div>
                 <div className="home-img padd-15">
                   <img src="images/Formal_Photo.jpg" alt="" />

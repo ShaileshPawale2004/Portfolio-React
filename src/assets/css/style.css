@@ -788,3 +788,73 @@ h3.my-profession{
     }
 }
 
+/* Add this to your main :root or existing theme CSS */
+:root {
+    --button-bg-start: #D8D9DB;
+    --button-bg-mid: #fff;
+    --button-bg-end: #FDFDFD;
+    --button-border: #8F9092;
+    --button-text: #606060;
+    --button-highlight: #FCFCFC;
+    --button-inner: #CECFD1;
+    --button-inset: #999;
+    --button-glow: #aaa;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    background-image: linear-gradient(
+      to top,
+      var(--button-bg-start) 0%,
+      var(--button-bg-mid) 80%,
+      var(--button-bg-end) 100%
+    );
+    border-radius: 30px;
+    border: 2px solid black; /* ✅ Always black */
+    transition: all 0.2s ease;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--skin-color);
+    text-shadow: 0 1px #fff;
+    outline: none;
+  }
+  
+  /* Hover effect */
+  button:hover {
+    box-shadow: 
+      0 4px 3px 1px var(--button-highlight),
+      0 6px 8px #D6D7D9,
+      0 -4px 4px var(--button-inner),
+      0 -6px 4px #FEFEFE,
+      inset 0 0 3px 3px var(--button-inner);
+    border: 2px solid black; /* ✅ Still black */
+  }
+  
+  /* Focus & Active: enhance shadow, retain black border */
+  button:focus,
+  button:focus-visible,
+  button:active {
+    outline: none !important;
+    border: 1px solid black !important; /* ✅ Enforced */
+    box-shadow:
+      0 4px 3px 1px var(--button-highlight),
+      0 6px 8px #D6D7D9,
+      0 -4px 4px var(--button-inner),
+      0 -6px 4px #FEFEFE,
+      inset 0 0 5px 3px var(--button-inset),
+      inset 0 0 30px var(--button-glow);
+  }
+  
+  /* Theme skin color for text */
+  .btn-hire {
+    color: var(--skin-color) !important;
+  }
+  
+  
+  
