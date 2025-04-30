@@ -857,4 +857,73 @@ h3.my-profession{
   }
   
   
+  .custom-dlbtn-wrapper {
+    position: relative !important;
+    width: 180px !important;
+    height: 40px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    border: 1px solid var(--skin-color-dark, var(--skin-color)) !important;
+    background-color: var(--skin-color, #209978) !important;
+    overflow: hidden !important;
+    border-radius: 0px !important;
+    transition: all 0.3s ease !important;
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600 !important;
+    padding: 0 !important;
+    margin-top: 15px !important;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+  
+  .custom-dlbtn-text {
+    transform: translateX(22px) !important;
+    color: #fff !important;
+    white-space: nowrap !important;
+    transition: all 0.3s ease !important;
+    background: none !important;
+    text-shadow: none !important;
+  }
+  
+  .custom-dlbtn-icon {
+    position: absolute !important;
+    transform: translateX(140px) !important;
+    height: 100% !important;
+    width: 40px !important;
+    background-color: color-mix(in srgb, var(--skin-color) 80%, black) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .custom-dlbtn-svg {
+    width: 20px !important;
+    fill: #fff !important;
+  }
+  
+  .custom-dlbtn-wrapper:hover {
+    background-color: color-mix(in srgb, var(--skin-color) 80%, black) !important;
+  }
+  
+  .custom-dlbtn-wrapper:hover .custom-dlbtn-text {
+    color: transparent !important;
+  }
+  
+  .custom-dlbtn-wrapper:hover .custom-dlbtn-icon {
+    width: 187px !important;
+    transform: translateX(0) !important;
+    justify-content: center !important;
+  }
+  
+  .custom-dlbtn-wrapper:active .custom-dlbtn-icon {
+    background-color: color-mix(in srgb, var(--skin-color) 65%, black) !important;
+  }
+  
+  .custom-dlbtn-wrapper:active {
+    border: 1px solid color-mix(in srgb, var(--skin-color) 65%, black) !important;
+  }
+  
   
