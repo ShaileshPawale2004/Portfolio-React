@@ -5,7 +5,10 @@ import Typed from 'typed.js';
 
 function App() {
   const [activeSection, setActiveSection] = useState("home");
-  const [isDarkMode, setIsDarkMode] = useState(false); // <-- moved inside function
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [activeTab, setActiveTab] = useState("projects");
+  const [projectsClicked, setProjectsClicked] = useState(false);
+
 
   const setActiveStyle = (color) => {
     const styles = document.querySelectorAll(".alternate-style");
@@ -24,23 +27,19 @@ function App() {
       backSpeed: 60,
       loop: true,
     });
-
     return () => typed.destroy();
   }, []);
 
   useEffect(() => {
     const toggler = document.querySelector(".style-switcher-toggler");
     const panel = document.querySelector(".style-switcher");
-
     const togglePanel = () => panel.classList.toggle("open");
-
     if (toggler && panel) toggler.addEventListener("click", togglePanel);
     return () => toggler?.removeEventListener("click", togglePanel);
   }, []);
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
-
     const onScroll = () => {
       let current = "";
       sections.forEach((section) => {
@@ -51,7 +50,6 @@ function App() {
       });
       setActiveSection(current);
     };
-
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -59,11 +57,9 @@ function App() {
   useEffect(() => {
     const dayNight = document.querySelector(".day-night");
     const icon = dayNight?.querySelector("i");
-  
     const toggleDarkMode = () => {
       document.body.classList.toggle("dark");
       setIsDarkMode(document.body.classList.contains("dark"));
-  
       if (icon) {
         if (document.body.classList.contains("dark")) {
           icon.classList.remove("fa-moon");
@@ -74,12 +70,7 @@ function App() {
         }
       }
     };
-  
-    if (dayNight) {
-      dayNight.addEventListener("click", toggleDarkMode);
-    }
-  
-    // Initial check (on page load)
+    if (dayNight) dayNight.addEventListener("click", toggleDarkMode);
     if (icon) {
       if (document.body.classList.contains("dark")) {
         icon.classList.add("fa-sun");
@@ -87,11 +78,18 @@ function App() {
         icon.classList.add("fa-moon");
       }
     }
-  
     return () => {
       if (dayNight) dayNight.removeEventListener("click", toggleDarkMode);
     };
   }, []);
+
+  useEffect(() => {
+    if (projectsClicked) {
+      const timeout = setTimeout(() => setProjectsClicked(false), 700);
+      return () => clearTimeout(timeout);
+    }
+  }, [projectsClicked]);
+  
   
   
 
@@ -378,73 +376,102 @@ function App() {
           </section>
           {/* Services Section End */}
 
-          {/* Portfolio Section Start */}
-          <section className="portfolio section" id="portfolio">
-            <div className="container">
-              <div className="row">
-                <div className="section-title padd-15">
-                  <h2>Portfolio</h2>
-                </div>
-              </div>
-              <div className="row">
-                <div className="portfolio-heading padd-15">
-                  <h2>My Last Projects:</h2>
-                </div>
-              </div>
-              <div className="row">
-                {/* Portfolio Item Start */}
-                <div className="portfolio-item padd-15">
-                  <div className="portfolio-item-inner shadow-dark">
-                    <div className="portfolio-img">
-                      <img src="images/portfolio/portfolio-1.jpg" alt="Project 1" />
-                    </div>
-                  </div>
-                </div>
-                {/* Portfolio Item End */}
+{/* Portfolio Section Start */}
+<section className="portfolio section" id="portfolio">
+  <div className="container">
+    <div className="row">
+      <div className="section-title padd-15">
+        <h2>Portfolio</h2>
+      </div>
+    </div>
 
-                <div className="portfolio-item padd-15">
-                  <div className="portfolio-item-inner shadow-dark">
-                    <div className="portfolio-img">
-                      <img src="images/portfolio/portfolio-2.jpg" alt="Project 2" />
-                    </div>
-                  </div>
-                </div>
+    {/* Custom Buttons */}
+    <div className="portfolio-button-group">
+  <a
+    href="#"
+    className={`btn2 Port1 ${activeTab === 'projects' ? 'active-tab' : ''}`}
+    onClick={(e) => {
+      e.preventDefault();
+      setActiveTab("projects");
+      setProjectsClicked(true); // trigger animation
+    }}
+  >
+    <span>PROJECTS</span>
+  </a>
 
-                <div className="portfolio-item padd-15">
-                  <div className="portfolio-item-inner shadow-dark">
-                    <div className="portfolio-img">
-                      <img src="images/portfolio/portfolio-3.jpg" alt="Project 3" />
-                    </div>
-                  </div>
-                </div>
+  <a
+    href="#"
+    className={`btn2 Port2 ${activeTab === 'certificates' ? 'active-tab' : ''}`}
+    onClick={(e) => {
+      e.preventDefault();
+      setActiveTab("certificates");
+    }}
+  >
+    <span>CERTIFICATES</span>
+  </a>
 
-                <div className="portfolio-item padd-15">
-                  <div className="portfolio-item-inner shadow-dark">
-                    <div className="portfolio-img">
-                      <img src="images/portfolio/portfolio-4.jpg" alt="Project 4" />
-                    </div>
-                  </div>
-                </div>
+  <a
+    href="#"
+    className={`btn2 Port3 ${activeTab === 'techstack' ? 'active-tab' : ''}`}
+    onClick={(e) => {
+      e.preventDefault();
+      setActiveTab("techstack");
+    }}
+  >
+    <span>TECH STACK</span>
+  </a>
+</div>
 
-                <div className="portfolio-item padd-15">
-                  <div className="portfolio-item-inner shadow-dark">
-                    <div className="portfolio-img">
-                      <img src="images/portfolio/portfolio-5.jpg" alt="Project 5" />
-                    </div>
-                  </div>
-                </div>
 
-                <div className="portfolio-item padd-15">
-                  <div className="portfolio-item-inner shadow-dark">
-                    <div className="portfolio-img">
-                      <img src="images/portfolio/portfolio-6.jpg" alt="Project 6" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          {/* Portfolio Section End */}
+    {/* Dynamic Content */}
+    {activeTab === "projects" && (
+      <>
+        <div className="row">
+          <div className="portfolio-heading padd-15">
+            <h2>My Last Projects:</h2>
+          </div>
+        </div>
+
+        <div className={`row ${projectsClicked ? 'project-grid-fade' : ''}`}>
+  {[1, 2, 3, 4, 5, 6].map((num) => (
+    <div className="portfolio-item padd-15" key={num}>
+      <div className="portfolio-item-inner shadow-dark">
+        <div className="portfolio-img">
+          <img src={`images/portfolio/portfolio-${num}.jpg`} alt={`Project ${num}`} />
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+      </>
+    )}
+
+    {activeTab === "certificates" && (
+      <div className="row fade-in">
+        <div className="padd-15">
+          <h2>📜 Certificates</h2>
+          <p>Certificate content will appear here.</p>
+        </div>
+      </div>
+    )}
+
+    {activeTab === "techstack" && (
+      <div className="row fade-in">
+        <div className="padd-15">
+          <h2>🛠️ Tech Stack</h2>
+          <p>Tech stack details will be shown here.</p>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+{/* Portfolio Section End */}
+
+
+
+
+
           {/* Contact Section Start */}
           <section className="contact section" id="contact">
             <div className="container">
