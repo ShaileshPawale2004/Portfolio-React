@@ -119,7 +119,7 @@ function App() {
         </div>
         {/* Aside End */}
         {/* Main Content Start */}
-        <div className="main-content">
+        <div className="main-content" style={{width: "99vw"}}>
 
           {/* Home Section Start */}
           <section className="home section" id="home">
@@ -322,7 +322,7 @@ function App() {
                 </div>
                 {/* Service Item End */}
 
-                <div className="service-item padd-15">
+                <div className="service-item padd-15" >
                   <div className="service-item-inner">
                     <div className="icon">
                       <i className="fa fa-laptop-code"></i>
