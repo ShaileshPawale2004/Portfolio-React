@@ -136,6 +136,7 @@ ul{
 
 .btn:hover{
     transform: scale(1.05);
+    color: white;
 }
 
 .shadow-dark{
